@@ -1,11 +1,16 @@
 Package: psythelper
 Type: Package
-Title: What the Package Does (Title Case)
+Title: The Psychotherapy Evaluation Helper
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: 
+ person("Benedikt", "Claus", , "b.claus@pedscience.de", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-9501-0954"))
+Description: This package mainly helps to make psychotherapy evaluation easy.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    dplyr,
+    fs,
+    rlang
+RoxygenNote: 7.2.1
