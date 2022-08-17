@@ -12,5 +12,9 @@ LazyData: true
 Imports: 
     dplyr,
     fs,
+    janitor,
+    lubridate,
+    readr,
+    readxl,
     rlang
 RoxygenNote: 7.2.1
