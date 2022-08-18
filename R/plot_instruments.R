@@ -79,7 +79,7 @@
 #' Plot FET
 #'
 #' @param fig_height Figure height, defaults to 15
-#' @param filename File name for savong, defaults to `"FET.png"`
+#' @param filename File name for saving, defaults to `"FET.png"`
 #' @inheritParams .plot_instruments
 #'
 #' @importFrom tidyr pivot_longer
@@ -89,7 +89,7 @@
 #' @return A ggplot2 object
 .plot_fet <- function(data, filename = "FET.png", fig_path = "04 Figures/", fig_width = 15, fig_height = 15, fig_units = "cm") {
   plot <- data %>%
-    select(id, datum, starts_with("aenderung")) %>%
+    select(.data$id, .data$datum, starts_with("aenderung")) %>%
     pivot_longer(
       cols = starts_with("aenderung"),
       names_to = "outcome",
@@ -97,13 +97,13 @@
     ) %>%
     mutate(
       outcome = case_when(
-        outcome == "aenderung_groesse" ~ "Gr\u00f6ße",
+        outcome == "aenderung_groesse" ~ "Gr\u00f6\u00dfe",
         outcome == "aenderung_sicherheit" ~ "Sicherheit",
         outcome == "aenderung_geschwindigkeit" ~ "Geschwindigkeit"
       ),
-      outcome = as_factor(outcome)
+      outcome = as_factor(.data$outcome)
     ) %>%
-    ggplot(aes(datum, value, color = outcome)) +
+    ggplot(aes(.data$datum, .data$value, color = .data$outcome)) +
     geom_line() +
     geom_point() +
     scale_y_continuous(labels = scales::label_number(suffix = "%")) +
@@ -121,10 +121,13 @@
 #' @param filename File name for savong, defaults to `"Belastung.png"`
 #' @inheritParams .plot_instruments
 #'
+#' @importFrom forcats as_factor
+#' @importFrom ggplot2 aes
+#'
 #' @return A ggplot2 object
 .plot_burden <- function(data, filename = "Belastung.png", fig_path = "04 Figures/", fig_width = 15, fig_height = 15, fig_units = "cm") {
   plot <- data %>%
-    select(id, datum, starts_with("belastung")) %>%
+    select(.data$id, .data$datum, starts_with("belastung")) %>%
     pivot_longer(
       cols = starts_with("belastung"),
       names_to = "outcome",
@@ -136,9 +139,9 @@
         outcome == "belastung_freizeit_sozialleben" ~ "Sozialleben",
         outcome == "belastung_familie_haus" ~ "Familie/Haus"
       ),
-      outcome = as_factor(outcome)
+      outcome = as_factor(.data$outcome)
     ) %>%
-    ggplot(aes(datum, value, color = outcome)) +
+    ggplot(aes(.data$datum, .data$value, color = .data$outcome)) +
     geom_line() +
     geom_point() +
     scale_y_continuous(labels = scales::label_number(suffix = "%")) +
@@ -158,7 +161,7 @@
 #' @return A ggplot2 object
 .plot_success <- function(data, filename = "Therapieerfolg.png", fig_path = "04 Figures/", fig_width = 15, fig_height = 10, fig_units = "cm") {
   plot <- data %>%
-    ggplot(aes(datum, therapieerfolg)) +
+    ggplot(aes(.data$datum, .data$therapieerfolg)) +
     geom_line() +
     geom_point() +
     scale_x_date(labels = scales::label_date_short()) +

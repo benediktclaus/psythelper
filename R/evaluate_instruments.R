@@ -1,3 +1,80 @@
+#' Evaluate All Instruments
+#'
+#' @param data A dataframe with all responses and named empty columns before
+#'   every instrument.
+#'
+#' @importFrom stringr str_detect
+#'
+#' @return Does not really return anything, is mainly called for its side
+#'   effects.
+#' @export
+evaluate_instruments <- function(data) {
+  # Get all instruments
+  instruments <- .ext_instruments(data)
+
+
+  # Convert responses and evaluate instruments
+  if ("mom_di" %in% instruments) data <- .evaluate_mom_di(data)
+  if ("mom_ai" %in% instruments) data <- .evaluate_mom_ai(data)
+  if ("gad_7" %in% instruments) data <- .evaluate_gad_7(data)
+  if ("who_5" %in% instruments) data <- .evaluate_who_5(data)
+  if ("wi_d" %in% instruments) data <- .evaluate_wi_d(data)
+
+
+  # Rename therapy success, if available
+  if (any(str_detect(names(data), "therapieerfolg"))) {
+    data <- data %>%
+      rename(
+        therapieerfolg = .data$therapieerfolg_sehr_viel_schlechter_100_sehr_viel_besser_100,
+        belastung_arbeit_ausbildung = .data$arbeit_oder_ausbildung_gar_nicht_0_sehr_schwer_kann_nicht_mehr_arbeiten_100,
+        belastung_freizeit_sozialleben = .data$freizeit_und_sozialleben_gar_nicht_0_sehr_schwer_100,
+        belastung_familie_haus = .data$familienleben_und_haeusliche_pflichten_gar_nicht_0_sehr_schwer_100
+      )
+
+    instruments <- c(instruments, "therapieerfolg")
+  }
+
+
+  # Rename therapy expectations, if available
+  if (any(str_detect(names(data), "aenderung_ich"))) {
+    data <- data %>%
+      rename(
+        aenderung_groesse = .data$groesse_einer_aenderung_ich_erwarte_ueberhaupt_keine_aenderung_0_ich_erwarte_eine_vollstaendige_heilung_100,
+        aenderung_sicherheit = .data$sicherheit_einer_aenderung_ich_bin_sehr_unsicher_ob_sich_etwas_veraendern_wird_0_ich_bin_absolut_sicher_dass_sich_etwas_veraendern_wird_100,
+        aenderung_geschwindigkeit = .data$geschwindigkeit_einer_aenderung_ich_denke_es_wird_sofort_rinr_aenderung_eintreten_0_ich_denke_eine_aenderung_wird_zeit_benoetigen_100
+      )
+
+    instruments <- c(instruments, "fet")
+  }
+
+
+  # If there are impairments, list them as instrument
+  if (any(str_detect(names(data), "belastung"))) instruments <- c(instruments, "belastung")
+
+
+  # Plot instruments
+  if ("mom_di" %in% instruments) .plot_mom_di(data)
+  if ("mom_ai" %in% instruments) .plot_mom_ai(data)
+  if ("gad_7" %in% instruments) .plot_gad_7(data)
+  if ("who_5" %in% instruments) .plot_who_5(data)
+  if ("wi_d" %in% instruments) .plot_wi_d(data)
+  if ("fet" %in% instruments) .plot_fet(data)
+  if ("belastung" %in% instruments) .plot_burden(data)
+  if ("therapieerfolg" %in% instruments) .plot_success(data)
+
+
+  # Return an object of class "psythelper"
+  results <- list(
+    instruments = instruments,
+    data = data
+  )
+
+  class(results) <- "psythelper"
+
+  # Return list
+  return(results)
+}
+
 #' Evaluate The MoM-DI
 #'
 #' Evaluate the Mind over Mood Depression Inventory.
@@ -72,7 +149,7 @@
 #' @inheritParams .evaluate_mom_di
 #'
 #' @return A tibble containing all items with a sum score
-.evaluate_wi_d <- function(data, first_variable = .data$x1_machen_sie_sich_oft_sorgen_moeglicherweise_eine_ernsthafte_krankheit_zu_haben, last_variable = .data$x14_haben_sie_angst_krank_zu_werden) {
+.evaluate_wi_d <- function(data, first_variable = .data$x1_machen_sie_sich_oft_sorgen_krank, last_variable = .data$x14_haben_sie_angst_krank_zu_werden) {
   data %>%
     mutate(
       across({{ first_variable }} : {{ last_variable }},

@@ -6,8 +6,7 @@
 \usage{
 .evaluate_wi_d(
   data,
-  first_variable =
-    .data$x1_machen_sie_sich_oft_sorgen_moeglicherweise_eine_ernsthafte_krankheit_zu_haben,
+  first_variable = .data$x1_machen_sie_sich_oft_sorgen_krank,
   last_variable = .data$x14_haben_sie_angst_krank_zu_werden
 )
 }

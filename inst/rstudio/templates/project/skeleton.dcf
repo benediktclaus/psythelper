@@ -1,0 +1,10 @@
+Title: Patient Project
+Binding: patient_project
+Subtitle: Create a new patient project
+Icon: bene-logo.png
+
+Parameter: analyses
+Widget: CheckboxInput
+Label: Include analyses script template
+Default: On
+Position: right

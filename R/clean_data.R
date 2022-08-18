@@ -2,7 +2,7 @@
 #'
 #' @importFrom readxl read_excel
 #' @importFrom janitor clean_names
-#' @importFrom dplyr select mutate across row_number
+#' @importFrom dplyr select mutate across row_number rename
 #' @importFrom readr write_rds write_excel_csv2
 #' @importFrom lubridate as_date dmy_hms
 #'
@@ -26,6 +26,9 @@ clean_data <- function() {
       datum = .data$zuletzt_aktualisiert_am,
       .after = .data$zuletzt_aktualisiert_am
     )
+
+  instruments <- .ext_instruments(patient_import)
+  if ("wi_d" %in% instruments) rename(patient_import, x1_machen_sie_sich_oft_sorgen_krank = .data$x1_machen_sie_sich_oft_sorgen_moeglicherweise_eine_ernsthafte_krankheit_zu_haben)
 
 
   write_rds(patient_import, "02 Data/therapie-verlauf.rds")

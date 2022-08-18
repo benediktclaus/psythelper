@@ -17,7 +17,7 @@
 \item{data}{A tidy dataframe containing at least columns "datum" and a
 supported instrument}
 
-\item{filename}{File name for savong, defaults to `"FET.png"`}
+\item{filename}{File name for saving, defaults to `"FET.png"`}
 
 \item{fig_path}{Path to folder to save to, defaults to `"04 Figures/"`}
 

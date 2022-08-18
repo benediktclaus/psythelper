@@ -11,7 +11,9 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     benelib,
+    crayon,
     dplyr,
+    forcats,
     fs,
     ggplot2,
     janitor,
@@ -21,6 +23,7 @@ Imports:
     readxl,
     rlang,
     scales,
+    stringr,
     tidyr
 Remotes:
     benediktclaus/benelib
