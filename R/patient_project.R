@@ -5,7 +5,7 @@
 #' @param path Path, where project should be created
 #' @param ... Optional arguments
 #'
-#' @importFrom fs path
+#' @importFrom fs path dir_create
 #' @importFrom purrr walk
 #' @importFrom benelib use_custom_folder
 #'
@@ -23,16 +23,17 @@ patient_project <- function(path, ...) {
     walk(~ use_custom_folder(path, folder_name = .))
 
 
-  # Include additional folders if checked in the menu
-  if (arguments[["literature"]]) use_custom_folder(path, "Literature")
-  if (arguments[["article"]])    use_custom_folder(path, "Article")
-  if (arguments[["misc"]])       use_custom_folder(path, "Miscellaneous")
-
-
   # Create Analyses File if checked
   if (arguments[["analyses"]])       use_patient_analysis_template(path(path, "03 R"))
 }
 
+#' Create an analysis file
+#'
+#' @param folder Folder path
+#'
+#' @importFrom fs path_package path_wd file_copy
+#'
+#' @return Called for side effects.
 use_patient_analysis_template <- function(folder = NA) {
   # Check correct folder name format
   if (!is.na(folder) & !is.character(folder)) stop("The folder name must be a string.")
