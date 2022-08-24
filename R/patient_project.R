@@ -37,7 +37,7 @@ patient_project <- function(path, ...) {
 use_patient_analysis_template <- function(folder = NA) {
   # Check correct folder name format
   if (!is.na(folder) & !is.character(folder)) stop("The folder name must be a string.")
-  template_path <- path(path_package("benelib"), "templates", "analyses.R")
+  template_path <- path(path_package("psythelper"), "templates", "analyses.R")
 
 
   # If folder is defined, use it
