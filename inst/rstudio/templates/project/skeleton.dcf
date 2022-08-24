@@ -8,3 +8,9 @@ Widget: CheckboxInput
 Label: Include analyses script template
 Default: On
 Position: right
+
+Parameter: open_data_folder
+Widget: CheckboxInput
+Label: Open the raw data folder
+Default: On
+Position: right

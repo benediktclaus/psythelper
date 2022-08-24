@@ -5,7 +5,7 @@
 #' @param path Path, where project should be created
 #' @param ... Optional arguments
 #'
-#' @importFrom fs path dir_create
+#' @importFrom fs path dir_create file_show
 #' @importFrom purrr walk
 #' @importFrom benelib use_custom_folder
 #'
@@ -25,6 +25,7 @@ patient_project <- function(path, ...) {
 
   # Create Analyses File if checked
   if (arguments[["analyses"]])       use_patient_analysis_template(path(path, "03 R"))
+  if (arguments[["open_data_folder"]]) file_show(path(path, "01 Raw Data"))
 }
 
 #' Create an analysis file
