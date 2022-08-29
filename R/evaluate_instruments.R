@@ -41,7 +41,7 @@ evaluate_instruments <- function(data) {
       rename(
         aenderung_groesse = .data$groesse_einer_aenderung_ich_erwarte_ueberhaupt_keine_aenderung_0_ich_erwarte_eine_vollstaendige_heilung_100,
         aenderung_sicherheit = .data$sicherheit_einer_aenderung_ich_bin_sehr_unsicher_ob_sich_etwas_veraendern_wird_0_ich_bin_absolut_sicher_dass_sich_etwas_veraendern_wird_100,
-        aenderung_geschwindigkeit = .data$geschwindigkeit_einer_aenderung_ich_denke_es_wird_sofort_rinr_aenderung_eintreten_0_ich_denke_eine_aenderung_wird_zeit_benoetigen_100
+        aenderung_geschwindigkeit = .data$geschwindigkeit_einer_aenderung_ich_denke_es_wird_sofort_eine_aenderung_eintreten_0_ich_denke_eine_aenderung_wird_zeit_benoetigen_100
       )
 
     instruments <- c(instruments, "fet")
