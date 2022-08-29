@@ -14,3 +14,9 @@ Widget: CheckboxInput
 Label: Open the raw data folder
 Default: On
 Position: right
+
+Parameter: open_analysis
+Widget: CheckboxInput
+Label: Open the analysis file
+Default: On
+Position: right

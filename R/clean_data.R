@@ -28,7 +28,7 @@ clean_data <- function() {
     )
 
   instruments <- .ext_instruments(patient_import)
-  if ("wi_d" %in% instruments) rename(patient_import, x1_machen_sie_sich_oft_sorgen_krank = .data$x1_machen_sie_sich_oft_sorgen_moeglicherweise_eine_ernsthafte_krankheit_zu_haben)
+  if ("wi_d" %in% instruments) patient_import <- rename(patient_import, x1_machen_sie_sich_oft_sorgen_krank = .data$x1_machen_sie_sich_oft_sorgen_moeglicherweise_eine_ernsthafte_krankheit_zu_haben)
 
 
   write_rds(patient_import, "02 Data/therapie-verlauf.rds")
