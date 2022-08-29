@@ -4,11 +4,15 @@
 #'   every instrument.
 #'
 #' @importFrom stringr str_detect
+#' @importFrom readr read_rds
 #'
 #' @return Does not really return anything, is mainly called for its side
 #'   effects.
 #' @export
-evaluate_instruments <- function(data) {
+evaluate_instruments <- function(data_path = "02 Data/therapie-verlauf.rds") {
+  # Get data file
+  data <- read_rds(data_path)
+
   # Get all instruments
   instruments <- .ext_instruments(data)
 

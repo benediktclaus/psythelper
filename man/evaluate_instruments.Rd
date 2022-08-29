@@ -4,7 +4,7 @@
 \alias{evaluate_instruments}
 \title{Evaluate All Instruments}
 \usage{
-evaluate_instruments(data)
+evaluate_instruments(data_path = "02 Data/therapie-verlauf.rds")
 }
 \arguments{
 \item{data}{A dataframe with all responses and named empty columns before
