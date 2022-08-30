@@ -1,7 +1,6 @@
 #' Evaluate All Instruments
 #'
-#' @param data A dataframe with all responses and named empty columns before
-#'   every instrument.
+#' @param data_path Whre lies the data? Defaults to `"02 Data/therapie-verlauf.rds"`
 #'
 #' @importFrom stringr str_detect
 #' @importFrom readr read_rds

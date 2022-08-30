@@ -16,6 +16,7 @@ Imports:
     forcats,
     fs,
     ggplot2,
+    gt,
     janitor,
     lubridate,
     purrr,
@@ -23,6 +24,7 @@ Imports:
     readxl,
     rlang,
     scales,
+    snakecase,
     stringr,
     tidyr
 Remotes:

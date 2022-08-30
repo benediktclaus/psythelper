@@ -7,8 +7,7 @@
 evaluate_instruments(data_path = "02 Data/therapie-verlauf.rds")
 }
 \arguments{
-\item{data}{A dataframe with all responses and named empty columns before
-every instrument.}
+\item{data_path}{Whre lies the data? Defaults to `"02 Data/therapie-verlauf.rds"`}
 }
 \value{
 Does not really return anything, is mainly called for its side
