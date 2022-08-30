@@ -16,3 +16,4 @@ clean_data()
 
 # Analyses ----------------------------------------------------------------
 evaluate_instruments()
+create_table(evaluate_instruments())
