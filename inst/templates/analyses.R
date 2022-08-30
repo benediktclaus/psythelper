@@ -15,5 +15,6 @@ clean_data()
 
 
 # Analyses ----------------------------------------------------------------
-evaluate_instruments()
-create_table(evaluate_instruments())
+evaluated_instruments <- evaluate_instruments()
+create_table(evaluated_instruments)
+evaluated_instruments
