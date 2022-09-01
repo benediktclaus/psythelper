@@ -6,7 +6,7 @@
 #'
 #' @importFrom dplyr left_join arrange rename_with all_of
 #' @importFrom snakecase to_title_case
-#' @importFrom gt gt cols_align tab_spanner gtsave fmt_missing
+#' @importFrom gt gt cols_align tab_spanner gtsave sub_missing
 #'
 #' @return A Word file in folder `"04 Figures"`
 #' @export
@@ -30,14 +30,14 @@ create_table <- function(object) {
     results_table <- data %>%
       gt() %>%
       cols_align(align = "left", columns = "Datum") %>%
-      fmt_missing()
+      sub_missing()
   } else {
     results_table <- data %>%
       rename_with(~ str_replace_all(., " ", "/"), .cols = "Arbeit Ausbildung":"Familie Haus") %>%
       gt() %>%
       cols_align(align = "left", columns = "Datum") %>%
       tab_spanner(label = "Belastung", columns = "Arbeit/Ausbildung":"Familie/Haus") %>%
-      fmt_missing()
+      sub_missing()
   }
 
   gtsave(results_table, "04 Figures/_Ergebnisse.docx")
