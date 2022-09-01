@@ -108,7 +108,7 @@ evaluate_instruments <- function(data_path = "02 Data/therapie-verlauf.rds") {
     mutate(
       across({{ first_variable }} : {{ last_variable }},
              ~ case_when(. == "Gar nicht" ~ 0, . == "Manchmal" ~ 1, . == "H\u00e4ufig" ~ 2, . == "Meistens" ~ 3)),
-      mom_di = rowSums(across({{ first_variable }} : {{ last_variable }}))
+      mom_ai = rowSums(across({{ first_variable }} : {{ last_variable }}))
     )
 }
 
