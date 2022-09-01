@@ -6,7 +6,7 @@
 #'
 #' @importFrom dplyr left_join arrange rename_with all_of
 #' @importFrom snakecase to_title_case
-#' @importFrom gt gt cols_align tab_spanner gtsave
+#' @importFrom gt gt cols_align tab_spanner gtsave fmt_missing
 #'
 #' @return A Word file in folder `"04 Figures"`
 #' @export
@@ -14,7 +14,7 @@ create_table <- function(object) {
   data_raw <- ext_raw_data(object)
   instruments_raw <- object$instruments
 
-  instruments <- instruments_raw[!instruments_raw %in% c("fet", "belastung")]
+  instruments <- instruments_raw[!instruments_raw %in% c("fet", "belastung", "arbeit_oder_ausbildung_gar_nicht_0_sehr_schwer_kann_nicht_mehr_arbeiten_100")]
 
   data <- data_raw %>%
     select(.data$datum, all_of(instruments))
@@ -29,13 +29,15 @@ create_table <- function(object) {
   if (!"belastung" %in% instruments_raw) {
     results_table <- data %>%
       gt() %>%
-      cols_align(align = "left", columns = "Datum")
+      cols_align(align = "left", columns = "Datum") %>%
+      fmt_missing()
   } else {
     results_table <- data %>%
       rename_with(~ str_replace_all(., " ", "/"), .cols = "Arbeit Ausbildung":"Familie Haus") %>%
       gt() %>%
       cols_align(align = "left", columns = "Datum") %>%
-      tab_spanner(label = "Belastung", columns = "Arbeit/Ausbildung":"Familie/Haus")
+      tab_spanner(label = "Belastung", columns = "Arbeit/Ausbildung":"Familie/Haus") %>%
+      fmt_missing()
   }
 
   gtsave(results_table, "04 Figures/_Ergebnisse.docx")
