@@ -26,7 +26,7 @@ patient_project <- function(path, ...) {
   # Create Analyses File if checked
   if (arguments[["analyses"]])       use_patient_analysis_template(path(path, "03 R"))
   if (arguments[["open_data_folder"]]) file_show(path(path, "01 Raw Data"))
-  if (arguments[["open_analysis"]]) file_show(path(path, "03 R", "analyses.R"))
+  # if (arguments[["open_analysis"]]) file_show(path(path, "03 R", "analyses.R"))
 }
 
 #' Create an analysis file
