@@ -22,6 +22,7 @@ evaluate_instruments <- function(data_path = "02 Data/therapie-verlauf.rds") {
   if ("gad_7" %in% instruments) data <- .evaluate_gad_7(data)
   if ("who_5" %in% instruments) data <- .evaluate_who_5(data)
   if ("wi_d" %in% instruments) data <- .evaluate_wi_d(data)
+  if ("oci_r" %in% instruments) data <- .evaluate_oci_r(data)
 
 
   # Rename therapy success, if available
@@ -61,6 +62,7 @@ evaluate_instruments <- function(data_path = "02 Data/therapie-verlauf.rds") {
   if ("gad_7" %in% instruments) .plot_gad_7(data)
   if ("who_5" %in% instruments) .plot_who_5(data)
   if ("wi_d" %in% instruments) .plot_wi_d(data)
+  if ("oci_r" %in% instruments) .plot_oci_r(data)
   if ("fet" %in% instruments) .plot_fet(data)
   if ("belastung" %in% instruments) .plot_burden(data)
   if ("therapieerfolg" %in% instruments) .plot_success(data)
@@ -158,5 +160,21 @@ evaluate_instruments <- function(data_path = "02 Data/therapie-verlauf.rds") {
       across({{ first_variable }} : {{ last_variable }},
              ~ case_when(. == "Nein" ~ 0, . == "Ja" ~ 1)),
       wi_d = rowSums(across({{ first_variable }} : {{ last_variable }}))
+    )
+}
+
+#' Evaluate the OCI-R
+#'
+#' Evaluate the Obsessive-Compulsive Inventory Revised in its German form.
+#'
+#' @inheritParams .evaluate_mom_di
+#'
+#' @return A tibble containing all items with a sum score
+.evaluate_oci_r <- function(data, first_variable = .data$x1_ich_bewahre_so_viele_gegenstaende_auf_dass_sie_mich_behindern, last_variable = .data$x18_ich_bekomme_haeufig_abscheuliche_gedanken) {
+  data %>%
+    mutate(
+      across({{ first_variable }} : {{ last_variable }},
+             ~ case_when(. == "Gar nicht" ~ 0, . == "Wenig" ~ 1, . == "Mittel" ~ 2, . == "Stark" ~ 3, . == "Sehr stark" ~ 4)),
+      oci_r = rowSums(across({{ first_variable }} : {{ last_variable }}))
     )
 }

@@ -75,6 +75,15 @@
   .plot_instruments(data, instrument = "wi_d", y_label = "WI-D", y_limit = 14, filename = "WI-D.png")
 }
 
+#' Plot OCI-R
+#'
+#' @inheritParams .plot_instruments
+#'
+#' @return A ggplot2 object
+.plot_oci_r <- function(data) {
+  .plot_instruments(data, instrument = "oci_r", y_label = "OCI-R", y_limit = 4*18, filename = "OCI-R.png")
+}
+
 
 #' Plot FET
 #'
