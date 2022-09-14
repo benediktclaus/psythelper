@@ -14,6 +14,7 @@ clean_data <- function() {
 
   patient_import <- read_excel(recent_dataset) %>%
     clean_names(ascii = FALSE, transliterations = "de-ASCII") %>%
+    filter(status == "Abgeschlossen") %>%
     select(-(.data$collector:.data$ip_adresse)) %>%
     mutate(
       id = row_number(), .before = 1
