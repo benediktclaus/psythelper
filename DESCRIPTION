@@ -1,7 +1,7 @@
 Package: psythelper
 Type: Package
 Title: The Psychotherapy Evaluation Helper
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
  person("Benedikt", "Claus", , "b.claus@pedscience.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9501-0954"))
