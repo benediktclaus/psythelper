@@ -84,6 +84,15 @@
   .plot_instruments(data, instrument = "oci_r", y_label = "OCI-R", y_limit = 4*18, filename = "OCI-R.png")
 }
 
+#' Plot SIAS
+#'
+#' @inheritParams .plot_instruments
+#'
+#' @return A ggplot2 object
+.plot_sias <- function(data) {
+  .plot_instruments(data, instrument = "sias", y_label = "SIAS", y_limit = 4*20, filename = "SIAS.png")
+}
+
 
 #' Plot FET
 #'

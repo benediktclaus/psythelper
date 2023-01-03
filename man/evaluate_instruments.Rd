@@ -7,7 +7,7 @@
 evaluate_instruments(data_path = "02 Data/therapie-verlauf.rds")
 }
 \arguments{
-\item{data_path}{Whre lies the data? Defaults to `"02 Data/therapie-verlauf.rds"`}
+\item{data_path}{Wehre lies the data? Defaults to `"02 Data/therapie-verlauf.rds"`}
 }
 \value{
 Does not really return anything, is mainly called for its side

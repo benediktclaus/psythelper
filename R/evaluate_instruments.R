@@ -1,6 +1,6 @@
 #' Evaluate All Instruments
 #'
-#' @param data_path Whre lies the data? Defaults to `"02 Data/therapie-verlauf.rds"`
+#' @param data_path Wehre lies the data? Defaults to `"02 Data/therapie-verlauf.rds"`
 #'
 #' @importFrom stringr str_detect
 #' @importFrom readr read_rds
@@ -23,6 +23,7 @@ evaluate_instruments <- function(data_path = "02 Data/therapie-verlauf.rds") {
   if ("who_5" %in% instruments) data <- .evaluate_who_5(data)
   if ("wi_d" %in% instruments) data <- .evaluate_wi_d(data)
   if ("oci_r" %in% instruments) data <- .evaluate_oci_r(data)
+  if ("sias" %in% instruments) data <- .evaluate_sias(data)
 
 
   # Rename therapy success, if available
@@ -176,5 +177,21 @@ evaluate_instruments <- function(data_path = "02 Data/therapie-verlauf.rds") {
       across({{ first_variable }} : {{ last_variable }},
              ~ case_when(. == "Gar nicht" ~ 0, . == "Wenig" ~ 1, . == "Mittel" ~ 2, . == "Stark" ~ 3, . == "Sehr stark" ~ 4)),
       oci_r = rowSums(across({{ first_variable }} : {{ last_variable }}))
+    )
+}
+
+#' Evaluate the SIAS
+#'
+#' Evaluate the Social Interaction Anxiety Scale.
+#'
+#' @inheritParams .evaluate_mom_di
+#'
+#' @return A tibble containing all items with a sum score
+.evaluate_sias <- function(data, first_variable = .data$x1_ich_werde_nervoes, last_variable = .data$x20_ich_bin_unsicher_ob) {
+  data %>%
+    mutate(
+      across({{ first_variable }} : {{ last_variable }},
+             ~ case_when(. == "Überhaupt nicht" ~ 0, . == "Ein wenig" ~ 1, . == "Ziemlich" ~ 2, . == "Stark" ~ 3, . == "Sehr stark" ~ 4)),
+      sias = rowSums(across({{ first_variable }} : {{ last_variable }}))
     )
 }
