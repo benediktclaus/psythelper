@@ -64,6 +64,7 @@ evaluate_instruments <- function(data_path = "02 Data/therapie-verlauf.rds") {
   if ("who_5" %in% instruments) .plot_who_5(data)
   if ("wi_d" %in% instruments) .plot_wi_d(data)
   if ("oci_r" %in% instruments) .plot_oci_r(data)
+  if ("sias" %in% instruments) .plot_sias(data)
   if ("fet" %in% instruments) .plot_fet(data)
   if ("belastung" %in% instruments) .plot_burden(data)
   if ("therapieerfolg" %in% instruments) .plot_success(data)

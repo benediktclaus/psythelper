@@ -24,7 +24,7 @@ create_table <- function(object) {
 
   data <- data %>%
     arrange(.data$datum) %>%
-    rename_with(~ to_title_case(., abbreviations = c("MoM", "DI", "AI", "WHO", "WI", "OCI")))
+    rename_with(~ to_title_case(., abbreviations = c("MoM", "DI", "AI", "WHO", "WI", "OCI", "SIAS")))
 
   if (!"belastung" %in% instruments_raw) {
     results_table <- data %>%
